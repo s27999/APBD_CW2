@@ -31,7 +31,7 @@ public class ConsoleUI
 
     private void DisplayMainMenu()
     {
-        Console.WriteLine("     WYPOZYCZALNIA SPRZETU ELEKTRONICZNEGO       ");
+        Console.WriteLine("     WYPOZYCZALNIA SPRZETU ELEKTRONICZNEGO     ");
         Console.WriteLine("1. Zarzadzaj Sprzetem");
         Console.WriteLine("2. Zarzadzaj Uzytkownikami");
         Console.WriteLine("3. Wyswietl Raporty");

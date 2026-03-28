@@ -118,7 +118,7 @@ public class EquipmentUI
         while (true)
         {
             Console.WriteLine("Podaj Id Uzytkownika:");
-            person = getRenterToCheck(Console.ReadLine());
+            person = _databaseManager.getRenterToCheck(Console.ReadLine());
 
             if (person != null)
             {
@@ -129,7 +129,7 @@ public class EquipmentUI
         while (true)
         {
             Console.WriteLine("Podaj Id Przedmiotu:");
-            equipment = getEquipmentToCheck(Console.ReadLine());
+            equipment = _databaseManager.getEquipmentToCheck(Console.ReadLine());
 
             if (equipment != null)
             {
@@ -156,7 +156,7 @@ public class EquipmentUI
         while (true)
         {
             Console.WriteLine("Podaj Id Uzytkownika:");
-            person = getRenterToCheck(Console.ReadLine());
+            person = _databaseManager.getRenterToCheck(Console.ReadLine());
 
             if (person != null)
             {
@@ -167,7 +167,7 @@ public class EquipmentUI
         while (true)
         {
             Console.WriteLine("Podaj Id Przedmiotu:");
-            equipment = getEquipmentToCheck(Console.ReadLine());
+            equipment = _databaseManager.getEquipmentToCheck(Console.ReadLine());
 
             if (equipment != null)
             {
@@ -186,34 +186,29 @@ public class EquipmentUI
         
         _equipmentManager.returnEquipment(rentEquipment);
     }
-    
-    
-    //Powinno byc w Logic, nie mam czasu
-    public Person getRenterToCheck(string Id)
-    {
-        foreach (Person p in _appDatabase.Persons)
-        {
-            if (p.Id == Id)
-            {
-                return p;
 
+    private void markEquipmentService()
+    {
+        Equipment equipment;
+        string sercviceDescription;
+
+        while (true)
+        {
+            Console.WriteLine("Podaj Id Przedmiotu:");
+            equipment = _databaseManager.getEquipmentToCheck(Console.ReadLine());
+
+            if (equipment != null)
+            {
+                break;
             }
         }
-
-        return null;
+        Console.WriteLine("Opis usterki:");
+        sercviceDescription = Console.ReadLine();
+        
+        Service service = new Service(equipment, sercviceDescription);
+        
+        _equipmentManager.addService(service);
     }
-    //Powinno byc w Logic, nie mam czasu
-    public Equipment getEquipmentToCheck(String Id)
-    {
-        foreach (Equipment e in _appDatabase.Equipment)
-        {
-            if (e.Id == Id)
-            {
-                return e;
-
-            }
-        }
-
-        return null;
-    }
+    
+    //Dodac kod na odznaczenie serwisu
 }

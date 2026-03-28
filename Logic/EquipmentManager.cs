@@ -45,6 +45,33 @@ public class EquipmentManager
         }
     }
 
+    public void addService(Service service)
+    {
+        _appDatabase.AddToServiceList(service);
+
+        foreach (Service e in _appDatabase.Services)
+        {
+            if (e.Id == service.Id)
+            {
+                e.ServiceStartDate = DateOnly.FromDateTime(DateTime.Now);
+                break;
+            }
+        }
+    }
+    
+    public void endService(Service service)
+    {
+
+        foreach (Service e in _appDatabase.Services)
+        {
+            if (e.Id == service.Id)
+            {
+                e.ServiceEndDate = DateOnly.FromDateTime(DateTime.Now);
+                break;
+            }
+        }
+    }
+
     public void markService(Service service)
     {
         foreach (Equipment e in _appDatabase.Equipment)

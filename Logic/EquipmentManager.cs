@@ -14,6 +14,20 @@ public class EquipmentManager
 
     public void rentEquipment(RentEquipment rentEquipment)
     {
+        Person wypozyczajacy = getRenterToCheck(rentEquipment);
+        Equipment doWypozyczenia = getEquipmentToCheck(rentEquipment);
+        
+        if (wypozyczajacy == null) return;
+        if (doWypozyczenia == null || doWypozyczenia.Availability != EquipmentStatus.Dostepny) return;
+        
+        if (wypozyczajacy.LiczbaWypoznien >= wypozyczajacy.MaksymalnaLiczbaWypozyczen)
+        {
+            Console.WriteLine("Osiągnięto limit wypożyczeń"); 
+            return;
+        }
+
+        wypozyczajacy.LiczbaWypoznien++;
+        
         _appDatabase.AddToRentEquipmentList(rentEquipment);
 
         foreach (Equipment e in _appDatabase.Equipment)
@@ -28,6 +42,12 @@ public class EquipmentManager
 
     public void returnEquipment(RentEquipment rentEquipment)
     {
+        Person wypozyczajacy = getRenterToCheck(rentEquipment);
+        
+        if (wypozyczajacy == null) return;
+        
+        wypozyczajacy.LiczbaWypoznien--;
+        
         rentEquipment.ActualReturnDate = DateOnly.FromDateTime(DateTime.Now);
 
         if (rentEquipment.ActualReturnDate > rentEquipment.PlannedReturnDate)
@@ -69,5 +89,33 @@ public class EquipmentManager
                 break;
             }
         }
+    }
+
+    public Person getRenterToCheck(RentEquipment rentEquipment)
+    {
+        foreach (Person p in _appDatabase.Persons)
+        {
+            if (p.Id == rentEquipment.PersonId)
+            {
+                return p;
+                
+            }
+        }
+
+        return null;
+    }
+    
+    public Equipment getEquipmentToCheck(RentEquipment rentEquipment)
+    {
+        foreach (Equipment e in _appDatabase.Equipment)
+        {
+            if (e.Id == rentEquipment.PersonId)
+            {
+                return e;
+                
+            }
+        }
+
+        return null;
     }
 }

@@ -27,7 +27,7 @@ public class AppDatabase
         this._rentEquipment.Add(rentEquipment);
     }
     
-    public List<Person> GetPersonsList() => this._persons;
-    public List<Equipment> GetEquipmentList() => this._equipment;
-    public List<RentEquipment> GetRentEquipmentList() => this._rentEquipment;
+    public List<Person> Persons => this._persons;
+    public List<Equipment> Equipment => this._equipment;
+    public List<RentEquipment> RentEquipment => this._rentEquipment;
 }

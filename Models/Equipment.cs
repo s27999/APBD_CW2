@@ -10,7 +10,6 @@ public enum EquipmentStatus
 public abstract class Equipment
 {
     private static int _nextIdNumber = 1;
-    private static int _dailyDelayPenalty = 10;
     
     public string Id { get; protected set; }
     public string Name { get; set; }

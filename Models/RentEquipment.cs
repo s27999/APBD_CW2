@@ -4,9 +4,13 @@ public class RentEquipment
 {
     public string PersonId { get; private set; }
     public string EquipmentId { get; private set; }
+    public static int DailyDelayPenalty { get; private set; } = 10;
     
     public DateOnly RentDate {get; set;}
     public DateOnly PlannedReturnDate {get; set;}
+    public DateOnly ActualReturnDate {get; set;}
+    
+    public int KaraZaOpoznienie {get; set;}
 
     public RentEquipment(Person person, Equipment equipment, DateOnly rentDate, DateOnly plannedReturnDate)
     {
@@ -16,7 +20,7 @@ public class RentEquipment
         RentDate = rentDate;
         PlannedReturnDate = plannedReturnDate;
 
-        equipment.Availability = EquipmentStatus.Wypozyczony;
+        KaraZaOpoznienie = 0;
     }
     
 }

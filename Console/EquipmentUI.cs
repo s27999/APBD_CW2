@@ -9,52 +9,83 @@ public class EquipmentUI
     private EquipmentManager _equipmentManager;
     private DataManager _dataManager;
     private DatabaseManager _databaseManager;
-    private AppDatabase _appDatabase;
 
-    public EquipmentUI(EquipmentManager equipmentManager, DataManager dataManager, DatabaseManager databaseManager, AppDatabase appDatabase)
+    public EquipmentUI(EquipmentManager equipmentManager, DataManager dataManager, DatabaseManager databaseManager)
     {
         _equipmentManager = equipmentManager;
         _dataManager = dataManager;
         _databaseManager = databaseManager;
-        _appDatabase = appDatabase;
     }
 
-    private void StartEquipmentUI()
+    public void StartEquipmentUI()
     {
-        Console.WriteLine("Wybierz akcje");
-        Console.WriteLine("1. Dodaj sprzęt");
-        Console.WriteLine("2. Wypożycz sprzęt");
-        Console.WriteLine("3. Zwróć sprzęt");
-        string choice = Console.ReadLine();
+        bool inMenu = true;
 
-        switch (choice)
+        while (inMenu)
         {
-            case "1":
-                AddEquipment();
-                break;
+            Console.WriteLine("Wybierz akcje");
+                    Console.WriteLine("1. Dodaj sprzęt");
+                    Console.WriteLine("2. Wypożycz sprzęt");
+                    Console.WriteLine("3. Zwróć sprzęt");
+                    Console.WriteLine("4. Oddaj sprzęt do serwisu");
+                    Console.WriteLine("5. Powrót");
+                    string choice = Console.ReadLine();
+            
+                    switch (choice)
+                    {
+                        case "1":
+                            AddEquipment();
+                            break;
+                        case  "2":
+                            RentEquipment();
+                            break;
+                        case "3":
+                            ReturnEquipment();
+                            break;
+                        case "4":
+                            ServiceEquipment();
+                            break;
+                        case "5":
+                            inMenu = false;
+                            Console.Clear();
+                            break;
+                        default:
+                            Console.Clear();
+                            Console.WriteLine("nieznana Opcja");
+                            break;
+                    }
         }
+        
     }
     
     private void AddEquipment()
     {
-        Console.WriteLine("Wybierz rodzaj equipment");
-        Console.WriteLine("1. Laptop");
-        Console.WriteLine("2. Camera");
-        Console.WriteLine("3. Projector");
-        string choice = Console.ReadLine();
-        
-        switch  (choice)
+        bool inMenu = true;
+
+        while (inMenu)
         {
-            case "1":
-                _databaseManager.addNewEquipment(AddLaptop());
-                break;
-            case "2":
-                _databaseManager.addNewEquipment(AddCamera());
-                break;
-            case "3":
-                _databaseManager.addNewEquipment(AddProjector());
-                break;
+            Console.WriteLine("Wybierz rodzaj equipment");
+            Console.WriteLine("1. Laptop"); 
+            Console.WriteLine("2. Camera"); 
+            Console.WriteLine("3. Projector"); 
+            string choice = Console.ReadLine();
+            
+            switch  (choice) 
+            { 
+                case "1": 
+                    _databaseManager.addNewEquipment(AddLaptop()); 
+                    break;
+                
+                case "2": 
+                    _databaseManager.addNewEquipment(AddCamera()); 
+                    break;
+                
+                case "3": 
+                    _databaseManager.addNewEquipment(AddProjector()); 
+                    break;
+            }
         }
+        
     }
     
     private Laptop AddLaptop()
@@ -147,7 +178,7 @@ public class EquipmentUI
         _equipmentManager.rentEquipment(new RentEquipment(person, equipment, DateOnly.FromDateTime(DateTime.Today), plannedReturnDate));
     }
     
-    private void returnEquipment()
+    private void ReturnEquipment()
     {
         Person person = null;
         Equipment equipment = null;
@@ -175,19 +206,19 @@ public class EquipmentUI
             }
         }
         
-        foreach (RentEquipment r in _appDatabase.RentEquipment)
+        /*foreach (RentEquipment r in _appDatabase.RentEquipment)
         {
             if (r.PersonId == person.Id &&  r.EquipmentId == equipment.Id)
             {
                 rentEquipment = r;
             }
-        }
+        }*/
         
         
-        _equipmentManager.returnEquipment(rentEquipment);
+        _equipmentManager.returnEquipment(_databaseManager.getRentEquipmentToCheck(equipment.Id, person.Id));
     }
 
-    private void markEquipmentService()
+    private void ServiceEquipment()
     {
         Equipment equipment;
         string sercviceDescription;

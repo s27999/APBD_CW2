@@ -25,16 +25,35 @@ public class ConsoleUI
         
         while (isWorking)
         {
+            Console.WriteLine("     WYPOZYCZALNIA SPRZETU ELEKTRONICZNEGO     ");
+            Console.WriteLine("1. Zarzadzaj Sprzetem");
+            Console.WriteLine("2. Dodaj Uzytkownika");
+            Console.WriteLine("3. Wyswietl Raporty");
+            Console.WriteLine("4. Wyjdz");
+
+            string choice = Console.ReadLine();
+        
+            switch (choice)
+            {
+                case "1":
+                    _equipmentUI.StartEquipmentUI();
+                    break;
+                case "2":
+                    AddPerson();
+                    break;
+                case "3":
                 
+                    break;
+                case "4":
+                    isWorking = false;
+                    break;
+            }    
         }
     }
 
     private void DisplayMainMenu()
     {
-        Console.WriteLine("     WYPOZYCZALNIA SPRZETU ELEKTRONICZNEGO     ");
-        Console.WriteLine("1. Zarzadzaj Sprzetem");
-        Console.WriteLine("2. Zarzadzaj Uzytkownikami");
-        Console.WriteLine("3. Wyswietl Raporty");
+        
     }
 
     private void AddPerson()

@@ -8,12 +8,14 @@ public class ConsoleUI
     private EquipmentManager _equipmentManager;
     private DataManager _dataManager;
     private DatabaseManager _databaseManager;
+    private EquipmentUI _equipmentUI;
 
     public ConsoleUI(EquipmentManager equipmentManager, DataManager dataManager, DatabaseManager databaseManager)
     {
         _equipmentManager = equipmentManager;
         _dataManager = dataManager;
         _databaseManager = databaseManager;
+        _equipmentUI = new EquipmentUI(_equipmentManager, _dataManager, _databaseManager);
     }
 
     public void Start()

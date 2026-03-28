@@ -15,6 +15,8 @@ public class RentEquipment
        
         RentDate = rentDate;
         PlannedReturnDate = plannedReturnDate;
+
+        equipment.Availability = EquipmentStatus.Wypozyczony;
     }
     
 }

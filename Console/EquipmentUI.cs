@@ -68,6 +68,7 @@ public class EquipmentUI
             Console.WriteLine("1. Laptop"); 
             Console.WriteLine("2. Camera"); 
             Console.WriteLine("3. Projector"); 
+            Console.WriteLine("4. Exit");
             string choice = Console.ReadLine();
             
             switch  (choice) 
@@ -82,6 +83,9 @@ public class EquipmentUI
                 
                 case "3": 
                     _databaseManager.addNewEquipment(AddProjector()); 
+                    break;
+                case "4":
+                    inMenu = false;
                     break;
             }
         }

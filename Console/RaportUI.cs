@@ -105,5 +105,7 @@ public class RaportUI
         Console.WriteLine("Lista przedmiotów:");
         WygenerujListeSprzetu();
         
+        Console.WriteLine();
+        Console.WriteLine();
     }
 }

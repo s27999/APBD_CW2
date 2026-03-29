@@ -9,6 +9,7 @@ public class ConsoleUI
     private DataManager _dataManager;
     private DatabaseManager _databaseManager;
     private EquipmentUI _equipmentUI;
+    private RaportUI _raportUI;
 
     public ConsoleUI(EquipmentManager equipmentManager, DataManager dataManager, DatabaseManager databaseManager)
     {
@@ -16,6 +17,7 @@ public class ConsoleUI
         _dataManager = dataManager;
         _databaseManager = databaseManager;
         _equipmentUI = new EquipmentUI(_equipmentManager, _dataManager, _databaseManager);
+        _raportUI = new RaportUI(_equipmentManager, _dataManager, _databaseManager);
     }
 
     public void Start()
@@ -42,7 +44,7 @@ public class ConsoleUI
                     AddPerson();
                     break;
                 case "3":
-                
+                    _raportUI.StartRaportUI();
                     break;
                 case "4":
                     isWorking = false;
